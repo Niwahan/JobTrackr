@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* JobTrackr Design System - Professional Blue Theme */
+
+@layer base {
+  :root {
+    /* Core colors - Professional Blue Theme */
+    --background: 0 0% 100%; /* white */
+    --foreground: 222 84% 5%;   /* very dark blue-gray */
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 84% 5%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 84% 5%;
+
+    --primary: 221 83% 53%; /* deep blue */
+    --primary-foreground: 0 0% 100%; /* white */
+    --primary-glow: 217 91% 60%; /* lighter blue */
+
+    --secondary: 214 95% 93%; /* very light blue */
+    --secondary-foreground: 222 84% 5%;
+
+    --muted: 214 95% 93%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 214 95% 93%;
+    --accent-foreground: 222 84% 5%;
+
+    /* Status colors for job tracking */
+    --success: 142 76% 36%; /* emerald green */
+    --success-foreground: 0 0% 100%;
+    --warning: 43 96% 56%; /* amber */
+    --warning-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%; /* red */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
+
+    /* Shadows */
+    --shadow-elegant: 0 10px 30px -10px hsl(var(--primary) / 0.15);
+    --shadow-card: 0 4px 12px -2px hsl(221 83% 53% / 0.08);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 214 95% 93%;
+    --sidebar-foreground: 222 84% 5%;
+    --sidebar-primary: 221 83% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 214 95% 93%;
+    --sidebar-accent-foreground: 222 84% 5%;
+    --sidebar-border: 214 32% 91%;
+    --sidebar-ring: 221 83% 53%;
+  }
+
+  .dark {
+    /* Dark mode colors - Professional Blue Theme */
+    --background: 222 84% 5%; /* very dark blue-gray */
+    --foreground: 210 40% 98%; /* very light blue-gray */
+
+    --card: 222 84% 5%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 84% 5%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217 91% 60%; /* lighter blue for dark mode */
+    --primary-foreground: 222 84% 5%; /* dark background */
+    --primary-glow: 221 83% 53%; /* deep blue */
+
+    --secondary: 217 33% 17%; /* dark blue-gray */
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 33% 17%;
+    --accent-foreground: 210 40% 98%;
+
+    --success: 142 76% 36%; /* emerald green */
+    --success-foreground: 0 0% 100%;
+    --warning: 43 96% 56%; /* amber */
+    --warning-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%; /* red */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 217 91% 60%;
+    --sidebar-background: 222 84% 5%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 222 84% 5%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 33% 17%;
+    --sidebar-ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
