@@ -8,6 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft, Edit, Trash2, ExternalLink, Calendar, MapPin, DollarSign, FileText } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
+import { normalizeUrl } from "@/lib/utils";
 
 type Job = Tables<"jobs">;
 
@@ -192,7 +193,7 @@ const JobDetails = () => {
                     <div className="flex items-center space-x-2">
                       <ExternalLink className="h-5 w-5 text-muted-foreground" />
                       <a
-                        href={job.url}
+                        href={normalizeUrl(job.url)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-primary hover:underline"

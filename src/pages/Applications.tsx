@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Plus, Edit, Trash2, Eye, Search, Grid3X3, List, MapPin, Calendar, DollarSign, ExternalLink } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 import Navigation from "@/components/Navigation";
+import { normalizeUrl } from "@/lib/utils";
 
 type Job = Tables<"jobs">;
 
@@ -280,7 +281,7 @@ const Applications = () => {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => window.open(job.url, '_blank')}
+                          onClick={() => window.open(normalizeUrl(job.url), '_blank')}
                           className="h-8 w-8 p-0"
                         >
                           <ExternalLink className="h-4 w-4" />
