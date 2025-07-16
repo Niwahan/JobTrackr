@@ -12,18 +12,14 @@ const Index = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setLoading(false);
-      
-      // Redirect if already authenticated
+
       if (session) {
         navigate("/dashboard");
       }
     });
-
-    // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
         setSession(session);
@@ -74,9 +70,9 @@ const Index = () => {
             Track Your Job Applications
             <span className="block text-primary mt-2">Like a Pro</span>
           </h1>
-          
+
           <p className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-            Keep all your job applications organized in one place. Track status, deadlines, 
+            Keep all your job applications organized in one place. Track status, deadlines,
             and notes to stay on top of your job search.
           </p>
 

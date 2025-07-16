@@ -46,9 +46,9 @@ const Applications = () => {
   const deleteJob = async (id: string) => {
     try {
       const { error } = await supabase.from("jobs").delete().eq("id", id);
-      
+
       if (error) throw error;
-      
+
       setJobs(jobs.filter(job => job.id !== id));
       toast({
         title: "Success",
@@ -64,7 +64,6 @@ const Applications = () => {
   };
 
   useEffect(() => {
-    // Check authentication
     const checkAuth = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
@@ -73,7 +72,7 @@ const Applications = () => {
       }
       fetchJobs();
     };
-    
+
     checkAuth();
   }, [navigate]);
 
@@ -81,20 +80,19 @@ const Applications = () => {
     switch (status) {
       case "applied": return "applied";
       case "interviewing": return "interviewing";
-      case "offer": return "offer";  
+      case "offer": return "offer";
       case "rejected": return "rejected";
       default: return "applied";
     }
   };
 
-  // Filter jobs based on status and search term
   const filteredJobs = jobs.filter(job => {
     const matchesStatus = filterStatus === "all" || job.status === filterStatus;
-    const matchesSearch = searchTerm === "" || 
+    const matchesSearch = searchTerm === "" ||
       job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
       (job.location && job.location.toLowerCase().includes(searchTerm.toLowerCase()));
-    
+
     return matchesStatus && matchesSearch;
   });
 
@@ -113,7 +111,6 @@ const Applications = () => {
     <div className="min-h-screen bg-gradient-subtle">
       <Navigation jobCount={jobs.length} />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold">Applications</h1>
@@ -124,8 +121,6 @@ const Applications = () => {
             Add Application
           </Button>
         </div>
-
-        {/* Filters and View Toggle */}
         <Card className="mb-6">
           <CardContent className="pt-6">
             <div className="flex flex-col sm:flex-row gap-4">
@@ -177,15 +172,14 @@ const Applications = () => {
           </CardContent>
         </Card>
 
-        {/* Applications Content */}
         {filteredJobs.length === 0 ? (
           <Card>
             <CardContent className="pt-6">
               <div className="text-center py-12">
                 <div className="max-w-md mx-auto">
                   <h3 className="text-lg font-semibold mb-2">
-                    {searchTerm || filterStatus !== "all" 
-                      ? "No applications found" 
+                    {searchTerm || filterStatus !== "all"
+                      ? "No applications found"
                       : "No job applications yet"
                     }
                   </h3>
@@ -206,7 +200,6 @@ const Applications = () => {
             </CardContent>
           </Card>
         ) : viewMode === "cards" ? (
-          // Card View
           <div>
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">Job Applications ({filteredJobs.length})</h2>
@@ -300,7 +293,6 @@ const Applications = () => {
             </div>
           </div>
         ) : (
-          // List View
           <Card>
             <CardHeader>
               <CardTitle>Job Applications ({filteredJobs.length})</CardTitle>
@@ -340,7 +332,7 @@ const Applications = () => {
                         </StatusBadge>
                       </TableCell>
                       <TableCell>
-                        {job.appliedDate 
+                        {job.appliedDate
                           ? new Date(job.appliedDate).toLocaleDateString()
                           : "—"
                         }

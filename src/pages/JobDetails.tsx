@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { StatusBadge } from "@/components/ui/status-badge";
-import { Separator } from "@/components/ui/separator";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft, Edit, Trash2, ExternalLink, Calendar, MapPin, DollarSign, FileText } from "lucide-react";
@@ -21,7 +20,6 @@ const JobDetails = () => {
 
   useEffect(() => {
     const checkAuthAndFetchJob = async () => {
-      // Check authentication
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         navigate("/auth");
@@ -38,7 +36,6 @@ const JobDetails = () => {
         return;
       }
 
-      // Fetch job data
       try {
         const { data, error } = await supabase
           .from("jobs")
@@ -65,17 +62,17 @@ const JobDetails = () => {
 
   const deleteJob = async () => {
     if (!job) return;
-    
+
     try {
       const { error } = await supabase.from("jobs").delete().eq("id", job.id);
-      
+
       if (error) throw error;
-      
+
       toast({
         title: "Success",
         description: "Job deleted successfully",
       });
-      
+
       navigate("/dashboard");
     } catch (error: any) {
       toast({
@@ -90,7 +87,7 @@ const JobDetails = () => {
     switch (status) {
       case "applied": return "applied";
       case "interviewing": return "interviewing";
-      case "offer": return "offer";  
+      case "offer": return "offer";
       case "rejected": return "rejected";
       default: return "applied";
     }
@@ -122,7 +119,6 @@ const JobDetails = () => {
 
   return (
     <div className="min-h-screen bg-gradient-subtle">
-      {/* Header */}
       <header className="bg-card/80 backdrop-blur-sm border-b">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -161,7 +157,6 @@ const JobDetails = () => {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="space-y-6">
-          {/* Main Job Info Card */}
           <Card>
             <CardHeader>
               <div className="flex justify-between items-start">
@@ -178,7 +173,6 @@ const JobDetails = () => {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Left Column */}
                 <div className="space-y-4">
                   {job.location && (
                     <div className="flex items-center space-x-2">
@@ -186,14 +180,14 @@ const JobDetails = () => {
                       <span>{job.location}</span>
                     </div>
                   )}
-                  
+
                   {job.salary && (
                     <div className="flex items-center space-x-2">
                       <DollarSign className="h-5 w-5 text-muted-foreground" />
                       <span>{job.salary}</span>
                     </div>
                   )}
-                  
+
                   {job.url && (
                     <div className="flex items-center space-x-2">
                       <ExternalLink className="h-5 w-5 text-muted-foreground" />
@@ -209,7 +203,6 @@ const JobDetails = () => {
                   )}
                 </div>
 
-                {/* Right Column */}
                 <div className="space-y-4">
                   {job.appliedDate && (
                     <div className="flex items-center space-x-2">
@@ -217,14 +210,14 @@ const JobDetails = () => {
                       <span>Applied: {new Date(job.appliedDate).toLocaleDateString()}</span>
                     </div>
                   )}
-                  
+
                   {job.deadline && (
                     <div className="flex items-center space-x-2">
                       <Calendar className="h-5 w-5 text-muted-foreground" />
                       <span>Deadline: {new Date(job.deadline).toLocaleDateString()}</span>
                     </div>
                   )}
-                  
+
                   {job.reminderDate && (
                     <div className="flex items-center space-x-2">
                       <Calendar className="h-5 w-5 text-muted-foreground" />
@@ -236,7 +229,6 @@ const JobDetails = () => {
             </CardContent>
           </Card>
 
-          {/* Notes Section */}
           {job.notes && (
             <Card>
               <CardHeader>
@@ -253,7 +245,6 @@ const JobDetails = () => {
             </Card>
           )}
 
-          {/* Tags Section */}
           {job.tags && job.tags.length > 0 && (
             <Card>
               <CardHeader>
@@ -270,8 +261,6 @@ const JobDetails = () => {
               </CardContent>
             </Card>
           )}
-
-          {/* Metadata */}
           <Card>
             <CardHeader>
               <CardTitle>Application Timeline</CardTitle>

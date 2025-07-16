@@ -39,7 +39,6 @@ const EditJob = () => {
 
   useEffect(() => {
     const checkAuthAndFetchJob = async () => {
-      // Check authentication
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         navigate("/auth");
@@ -56,7 +55,6 @@ const EditJob = () => {
         return;
       }
 
-      // Fetch job data
       try {
         const { data, error } = await supabase
           .from("jobs")
@@ -106,7 +104,6 @@ const EditJob = () => {
     setLoading(true);
 
     try {
-      // Get the current user
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         throw new Error("User not authenticated");
@@ -115,7 +112,7 @@ const EditJob = () => {
       const { error } = await supabase
         .from("jobs")
         .update({
-          user_id: user.id, // Explicitly set the user_id
+          user_id: user.id,
           company: formData.company,
           title: formData.title,
           status: formData.status,

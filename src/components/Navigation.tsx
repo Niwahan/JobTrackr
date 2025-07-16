@@ -44,7 +44,7 @@ const Navigation = ({ jobCount = 0 }: NavigationProps) => {
               {jobCount} applications
             </Badge>
           </div>
-          
+
           <div className="flex items-center space-x-4">
             <Tabs value={getCurrentTab()} onValueChange={handleTabChange}>
               <TabsList>
@@ -58,7 +58,7 @@ const Navigation = ({ jobCount = 0 }: NavigationProps) => {
                 </TabsTrigger>
               </TabsList>
             </Tabs>
-            
+
             <Button variant="outline" onClick={handleSignOut} size="sm">
               Sign Out
             </Button>

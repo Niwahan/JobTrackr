@@ -17,7 +17,6 @@ const Auth = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Check if user is already logged in
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
@@ -30,7 +29,7 @@ const Auth = () => {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    
+
     try {
       const { error } = await supabase.auth.signUp({
         email,
@@ -39,9 +38,9 @@ const Auth = () => {
           emailRedirectTo: `${window.location.origin}/dashboard`
         }
       });
-      
+
       if (error) throw error;
-      
+
       toast({
         title: "Account created!",
         description: "Please check your email to confirm your account.",
@@ -60,15 +59,15 @@ const Auth = () => {
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    
+
     try {
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
-      
+
       if (error) throw error;
-      
+
       navigate("/dashboard");
     } catch (error: any) {
       toast({
@@ -90,7 +89,7 @@ const Auth = () => {
           redirectTo: `${window.location.origin}/dashboard`
         }
       });
-      
+
       if (error) throw error;
     } catch (error: any) {
       toast({
@@ -105,7 +104,6 @@ const Auth = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/10 flex items-center justify-center p-4">
       <Card className="w-full max-w-md shadow-elegant relative">
-        {/* Back Button */}
         <Button
           variant="ghost"
           size="sm"
@@ -115,7 +113,7 @@ const Auth = () => {
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back
         </Button>
-        
+
         <CardHeader className="text-center pt-12">
           <CardTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
             JobTrackr
@@ -130,7 +128,7 @@ const Auth = () => {
               <TabsTrigger value="signin">Sign In</TabsTrigger>
               <TabsTrigger value="signup">Sign Up</TabsTrigger>
             </TabsList>
-            
+
             <TabsContent value="signin" className="space-y-4">
               <form onSubmit={handleSignIn} className="space-y-4">
                 <div className="space-y-2">
@@ -159,7 +157,7 @@ const Auth = () => {
                 </Button>
               </form>
             </TabsContent>
-            
+
             <TabsContent value="signup" className="space-y-4">
               <form onSubmit={handleSignUp} className="space-y-4">
                 <div className="space-y-2">
@@ -190,7 +188,7 @@ const Auth = () => {
               </form>
             </TabsContent>
           </Tabs>
-          
+
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">

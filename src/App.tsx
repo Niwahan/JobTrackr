@@ -7,7 +7,6 @@ import { Suspense, lazy } from "react";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 
-// Lazy load pages to reduce initial bundle size
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Applications = lazy(() => import("./pages/Applications"));
 const AddJob = lazy(() => import("./pages/AddJob"));
@@ -17,7 +16,6 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
-// Loading component for lazy-loaded pages
 const PageLoader = () => (
   <div className="flex items-center justify-center min-h-screen">
     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
@@ -33,54 +31,54 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
-          <Route 
-            path="/dashboard" 
+          <Route
+            path="/dashboard"
             element={
               <Suspense fallback={<PageLoader />}>
                 <Dashboard />
               </Suspense>
-            } 
+            }
           />
-          <Route 
-            path="/applications" 
+          <Route
+            path="/applications"
             element={
               <Suspense fallback={<PageLoader />}>
                 <Applications />
               </Suspense>
-            } 
+            }
           />
-          <Route 
-            path="/add-job" 
+          <Route
+            path="/add-job"
             element={
               <Suspense fallback={<PageLoader />}>
                 <AddJob />
               </Suspense>
-            } 
+            }
           />
-          <Route 
-            path="/edit-job/:id" 
+          <Route
+            path="/edit-job/:id"
             element={
               <Suspense fallback={<PageLoader />}>
                 <EditJob />
               </Suspense>
-            } 
+            }
           />
-          <Route 
-            path="/job/:id" 
+          <Route
+            path="/job/:id"
             element={
               <Suspense fallback={<PageLoader />}>
                 <JobDetails />
               </Suspense>
-            } 
+            }
           />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route 
-            path="*" 
+
+          <Route
+            path="*"
             element={
               <Suspense fallback={<PageLoader />}>
                 <NotFound />
               </Suspense>
-            } 
+            }
           />
         </Routes>
       </BrowserRouter>

@@ -32,7 +32,6 @@ const AddJob = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Check authentication
     const checkAuth = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {

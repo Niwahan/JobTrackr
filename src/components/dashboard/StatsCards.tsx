@@ -28,7 +28,7 @@ const StatsCards = ({ stats, successRate, avgPerMonth }: StatsCardsProps) => {
           </p>
         </CardContent>
       </Card>
-      
+
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Success Rate</CardTitle>
@@ -41,7 +41,7 @@ const StatsCards = ({ stats, successRate, avgPerMonth }: StatsCardsProps) => {
           </p>
         </CardContent>
       </Card>
-      
+
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Avg/Month</CardTitle>
@@ -54,7 +54,7 @@ const StatsCards = ({ stats, successRate, avgPerMonth }: StatsCardsProps) => {
           </p>
         </CardContent>
       </Card>
-      
+
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">In Progress</CardTitle>

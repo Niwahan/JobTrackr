@@ -47,9 +47,9 @@ const Dashboard = () => {
   const deleteJob = async (id: string) => {
     try {
       const { error } = await supabase.from("jobs").delete().eq("id", id);
-      
+
       if (error) throw error;
-      
+
       setJobs(jobs.filter(job => job.id !== id));
       toast({
         title: "Success",
@@ -67,39 +67,36 @@ const Dashboard = () => {
 
 
   useEffect(() => {
-    // Check authentication
     const checkAuth = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         navigate("/auth");
         return;
       }
-      
-      // Get user information
+
       const { data: { user } } = await supabase.auth.getUser();
       setUser(user);
-      
+
       fetchJobs();
     };
-    
+
     checkAuth();
   }, [navigate]);
 
-  const filteredJobs = filterStatus === "all" 
-    ? jobs 
+  const filteredJobs = filterStatus === "all"
+    ? jobs
     : jobs.filter(job => job.status === filterStatus);
 
   const getStatusVariant = (status: string | null) => {
     switch (status) {
       case "applied": return "applied";
       case "interviewing": return "interviewing";
-      case "offer": return "offer";  
+      case "offer": return "offer";
       case "rejected": return "rejected";
       default: return "applied";
     }
   };
 
-  // Calculate statistics
   const stats = {
     total: jobs.length,
     applied: jobs.filter(job => job.status === "applied" || !job.status).length,
@@ -108,16 +105,11 @@ const Dashboard = () => {
     rejected: jobs.filter(job => job.status === "rejected").length,
   };
 
-  // Calculate success rate
   const successRate = stats.total > 0 ? ((stats.offers / stats.total) * 100).toFixed(1) : "0";
-
-  // Calculate average applications per month (last 6 months)
   const sixMonthsAgo = new Date();
   sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
   const recentJobs = jobs.filter(job => new Date(job.createdAt) >= sixMonthsAgo);
   const avgPerMonth = (recentJobs.length / 6).toFixed(1);
-
-  // Status distribution for pie chart
   const statusData = [
     { name: "Applied", value: stats.applied, color: "hsl(var(--primary))" },
     { name: "Interviewing", value: stats.interviewing, color: "hsl(var(--warning))" },
@@ -125,10 +117,9 @@ const Dashboard = () => {
     { name: "Rejected", value: stats.rejected, color: "hsl(var(--destructive))" },
   ].filter(item => item.value > 0);
 
-  // Applications over time (last 30 days)
   const thirtyDaysAgo = new Date();
   thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-  
+
   const applicationsOverTime = [];
   for (let i = 29; i >= 0; i--) {
     const date = new Date();
@@ -159,8 +150,7 @@ const Dashboard = () => {
       <Navigation jobCount={jobs.length} />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <WelcomeHeader user={user} />
-        
-        {/* Empty State */}
+
         {jobs.length === 0 && (
           <div className="mb-6 text-center">
             <h3 className="text-lg font-semibold mb-2">No job applications yet</h3>

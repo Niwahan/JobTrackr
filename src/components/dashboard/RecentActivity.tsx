@@ -15,13 +15,13 @@ interface RecentActivityProps {
   onNavigateToApplications: () => void;
 }
 
-const RecentActivity = ({ 
-  recentJobsList, 
-  totalJobsCount, 
-  getStatusVariant, 
-  onNavigateToJob, 
-  onNavigateToEditJob, 
-  onNavigateToApplications 
+const RecentActivity = ({
+  recentJobsList,
+  totalJobsCount,
+  getStatusVariant,
+  onNavigateToJob,
+  onNavigateToEditJob,
+  onNavigateToApplications
 }: RecentActivityProps) => {
   if (recentJobsList.length === 0) {
     return null;
