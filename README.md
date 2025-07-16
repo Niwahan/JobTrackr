@@ -1,5 +1,7 @@
 # JobTrackr 🎯
 
+[Live Demo](https://job-trackr-niwa.vercel.app/)
+
 A modern, professional job application tracking system built with React, TypeScript, and Supabase. Track your job search progress with beautiful analytics and intuitive management tools.
 
 ## ✨ Features
